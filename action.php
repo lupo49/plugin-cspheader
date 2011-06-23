@@ -25,7 +25,7 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
             'email'  => 'post@lupo49.de',
             'date'   => '2011-06-23',
             'name'   => 'Content Security Policy (CSP) plugin',
-            'desc'   => 'Injects Content Security Policy (CSP) headers.',
+            'desc'   => 'Injects the Content Security Policy (CSP) header.',
             'url'    => 'http://www.dokuwiki.org/plugin:cspheader',
         );
     }
