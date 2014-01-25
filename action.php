@@ -28,7 +28,8 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
      */
     function handle_headers_send(&$event, $params) {
         global $conf;
-        $cspheader = 'X-Content-Security-Policy: ';
+        $xcspheader = 'X-Content-Security-Policy: ';
+	$cspheader = 'Content-Security-Policy: ';
         $cspvalues = array();
         $addsemicolon = false;
         
@@ -123,12 +124,14 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
             }
 
             // concat each array element seperated by a semicolon and a space
-            $cspheader .= implode('; ', $cspvalues); 
+            $xcspheader .= implode('; ', $cspvalues); 
+	    $cspheader .= implode('; ', $cspvalues);
             
             if($conf["allowdebug"]) msg("CSPheader plugin (DEBUG): ". $cspheader);
             
             // add the CSP header to the existing headers
             array_push($event->data, $cspheader);
+	    array_push($event->data, $xcspheader);
         }
     }
 }
