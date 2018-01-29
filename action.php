@@ -31,7 +31,6 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
         $xcspheader = 'X-Content-Security-Policy: ';
         $cspheader = 'Content-Security-Policy: ';
         $cspvalues = array();
-        $addsemicolon = false;
 
         if($this->getConf('enableHeader')) {
             // Take care of spaces and semicolons betweeen the directives
