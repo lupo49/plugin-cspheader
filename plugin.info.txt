@@ -1,7 +1,7 @@
 base   cspheader
 author Matthias Schulte
 email  post@lupo49.de
-date   2011-06-23
+date   2018-01-29
 name   CSPheader plugin
 desc   Injects the Content Security Policy (CSP) header.
 url    http://dokuwiki.org/plugin:cspheader
