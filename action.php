@@ -23,7 +23,8 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
     const X_CSP_HEADER = 'X-Content-Security-Policy: ';
 
     /**
-     * Register the eventhandler.
+     * Register the event handler.
+     * @param Doku_Event_Handler $controller
      */
     function register(Doku_Event_Handler $controller) {
         $controller->register_hook('ACTION_HEADERS_SEND', 'BEFORE', $this, 'handle_headers_send');
@@ -31,6 +32,8 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
 
     /**
      * Handler for the ACTION_HEADERS_SEND event
+     * @param &$event
+     * @param $params
      */
     function handle_headers_send(&$event, $params) {
         global $conf;
