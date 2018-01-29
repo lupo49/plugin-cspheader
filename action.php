@@ -17,6 +17,12 @@ require_once DOKU_PLUGIN.'action.php';
 class action_plugin_cspheader extends DokuWiki_Action_Plugin {
 
     /**
+     * CSP Headers
+     */
+    const CSP_HEADER = 'Content-Security-Policy: ';
+    const X_CSP_HEADER = 'X-Content-Security-Policy: ';
+
+    /**
      * Register the eventhandler.
      */
     function register(Doku_Event_Handler $controller) {
@@ -28,8 +34,6 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
      */
     function handle_headers_send(&$event, $params) {
         global $conf;
-        $xcspheader = 'X-Content-Security-Policy: ';
-        $cspheader = 'Content-Security-Policy: ';
         $cspvalues = array();
 
         if($this->getConf('enableHeader')) {
@@ -121,15 +125,14 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
                 array_push($cspvalues, $policyuri);
             }
 
-            // concat each array element seperated by a semicolon and a space
-            $xcspheader .= implode('; ', $cspvalues); 
-            $cspheader .= implode('; ', $cspvalues);
+            // concat array elements seperated by a semicolon and a space
+            $header = implode('; ', $cspvalues);
 
-            if($conf["allowdebug"]) msg("CSPheader plugin (DEBUG): ". $cspheader);
+            if($conf["allowdebug"]) msg("CSPheader plugin (DEBUG): ". $header);
 
             // add the CSP header to the existing headers
-            array_push($event->data, $cspheader);
-            array_push($event->data, $xcspheader);
+            array_push($event->data, self::CSP_HEADER . $header);
+            array_push($event->data, self::X_CSP_HEADER . $header);
         }
     }
 }
