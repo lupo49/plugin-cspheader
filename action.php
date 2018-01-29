@@ -23,6 +23,28 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
     const X_CSP_HEADER = 'X-Content-Security-Policy: ';
 
     /**
+     * @var array $directives Mapping plugin's options to CSP directives
+     */
+    private $directives = array(
+        'allowValue' => 'allow ',
+        'imgsrcValue' => 'img-src ',
+        'scriptsrcValue' => 'script-src ',
+        'objectsrcValue' => 'object-src ',
+        'framesrcValue' => 'frame-src ',
+        'fontsrcValue' => 'font-src ',
+        'xhrsrcValue' => 'xhr-src ',
+        'frameancestorsValue' => 'frame-ancestors ',
+        'stylesrcValue' => 'style-src ',
+        'reporturiValue' => 'report-uri ',
+        'policyuriValue' => 'policy-uri ',
+    );
+
+    /**
+     * @var array $cspvalues
+     */
+    private $cspvalues = array();
+
+    /**
      * Register the event handler.
      * @param Doku_Event_Handler $controller
      */
@@ -37,7 +59,6 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
      */
     function handle_headers_send(&$event, $params) {
         global $conf;
-        $cspvalues = array();
 
         if($this->getConf('enableHeader')) {
             // Take care of spaces and semicolons betweeen the directives
@@ -47,95 +68,68 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
             // Documentation: https://developer.mozilla.org/en/Security/CSP/CSP_policy_directives
 
             // allow host-expr
-            if($this->getConf('allowValue')) {
-                $allow = 'allow ' . $this->getConf('allowValue');
-                array_push($cspvalues, $allow);
-            }
+            $this->set_csp_value('allowValue');
 
             // options [inline-script|eval-script]
-            if($this->getConf('optionsInline') || $this->getConf('optionsEval')) {
-                $optionsline = 'options';
-
-                if($this->getConf('optionsInline')) $optionsline .= ' inline-script';
-                if($this->getConf('optionsEval')) $optionsline .= ' eval-script';
-
-                array_push($cspvalues, $optionsline);
+            $opt_inline = $this->getConf('optionsInline') ? ' inline-script' : '';
+            $opt_eval = $this->getConf('optionsEval') ? ' eval-script' : '';
+            if($opt_inline || $opt_eval) {
+                $optionsline = 'options'. $opt_inline . $opt_eval;
+                array_push($this->cspvalues, $optionsline);
             }
 
             // img-src host-expr
-            if($this->getConf('imgsrcValue')) {
-                $imgsrc = 'img-src ' . $this->getConf('imgsrcValue');
-                array_push($cspvalues, $imgsrc);
-            }
+            $this->set_csp_value('imgsrcValue');
 
             // media-src host-expr
-            if($this->getConf('mediasrcValue')) {
-                $mediasrc = ' media-src ' . $this->getConf('mediasrcValue');
-                array_push($cspvalues, $mediasrc);
-            }
+            $this->set_csp_value('mediasrcValue');
 
             // script-src host-expr
-            if($this->getConf('scriptsrcValue')) {
-                $scriptsrc = 'script-src ' . $this->getConf('scriptsrcValue');
-                array_push($cspvalues, $scriptsrc);
-            }
+            $this->set_csp_value('scriptsrcValue');
 
             // object-src host-expr
-            if($this->getConf('objectsrcValue')) {
-                $objectsrc = 'object-src ' . $this->getConf('objectsrcValue');
-                array_push($cspvalues, $objectsrc);
-            }
+            $this->set_csp_value('objectsrcValue');
 
             // frame-src host-expr
-            if($this->getConf('framesrcValue')) {
-                $framesrc = 'frame-src ' . $this->getConf('framesrcValue');
-                array_push($cspvalues, $framesrc);
-            }
+            $this->set_csp_value('framesrcValue');
 
             // font-src host-expr
-            if($this->getConf('fontsrcValue')) {
-                $fontsrc = 'font-src ' . $this->getConf('fontsrcValue');
-                array_push($cspvalues, $fontsrc);
-            }
+            $this->set_csp_value('fontsrcValue');
 
             // xhr-src host-expr
-            if($this->getConf('xhrsrcValue')) {
-                $xhrsrc = 'xhr-src ' . $this->getConf('xhrsrcValue');
-                array_push($cspvalues, $xhrsrc);
-            }
+            $this->set_csp_value('xhrsrcValue');
 
             // frame-ancestors host-expr
-            if($this->getConf('frameancestorsValue')) {
-                $frameancestors = 'frame-ancestors ' . $this->getConf('frameancestorsValue');
-                array_push($cspvalues, $frameancestors);
-            }
+            $this->set_csp_value('frameancestorsValue');
 
             // style-src host-expr
-            if($this->getConf('stylesrcValue')) {
-                $stylesrc = 'style-src ' . $this->getConf('stylesrcValue');
-                array_push($cspvalues, $stylesrc);
-            }
+            $this->set_csp_value('stylesrcValue');
 
             // report-uri uri
-            if($this->getConf('reporturiValue')) {
-                $reportui = 'report-uri ' . $this->getConf('reporturiValue');
-                array_push($cspvalues, $reportui);
-            }
+            $this->set_csp_value('reporturiValue');
 
             // policy-uri uri
-            if($this->getConf('policyuriValue')) {
-                $policyuri = 'policy-uri ' . $this->getConf('policyuriValue');
-                array_push($cspvalues, $policyuri);
-            }
+            $this->set_csp_value('policyuriValue');
 
             // concat array elements seperated by a semicolon and a space
-            $header = implode('; ', $cspvalues);
+            $header = implode('; ', $this->cspvalues);
 
             if($conf["allowdebug"]) msg("CSPheader plugin (DEBUG): ". $header);
 
             // add the CSP header to the existing headers
             array_push($event->data, self::CSP_HEADER . $header);
             array_push($event->data, self::X_CSP_HEADER . $header);
+        }
+    }
+
+    /**
+     * Sets the CSP
+     * @param string $option
+     */
+     private function set_csp_value($option) {
+        $conf = $this->getConf($option);
+        if($conf) {
+            array_push($this->cspvalues, $this->directives[$option] . $conf);
         }
     }
 }
