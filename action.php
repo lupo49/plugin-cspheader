@@ -29,17 +29,17 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
     function handle_headers_send(&$event, $params) {
         global $conf;
         $xcspheader = 'X-Content-Security-Policy: ';
-	$cspheader = 'Content-Security-Policy: ';
+        $cspheader = 'Content-Security-Policy: ';
         $cspvalues = array();
         $addsemicolon = false;
-        
+
         if($this->getConf('enableHeader')) {
             // Take care of spaces and semicolons betweeen the directives
 
             // host-expr examples: http://*.foo.com, mail.foo.com:443, https://store.foo.com
             // Besides FQDNs there are some keywords which are allowed 'self', 'none' or data:-URIs
             // Documentation: https://developer.mozilla.org/en/Security/CSP/CSP_policy_directives
-            
+
             // allow host-expr
             if($this->getConf('allowValue')) {
                 $allow = 'allow ' . $this->getConf('allowValue');
@@ -52,7 +52,7 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
 
                 if($this->getConf('optionsInline')) $optionsline .= ' inline-script';
                 if($this->getConf('optionsEval')) $optionsline .= ' eval-script';
-                
+
                 array_push($cspvalues, $optionsline);
             }
 
@@ -73,7 +73,7 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
                 $scriptsrc = 'script-src ' . $this->getConf('scriptsrcValue');
                 array_push($cspvalues, $scriptsrc);
             }
-            
+
             // object-src host-expr
             if($this->getConf('objectsrcValue')) {
                 $objectsrc = 'object-src ' . $this->getConf('objectsrcValue');
@@ -85,13 +85,13 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
                 $framesrc = 'frame-src ' . $this->getConf('framesrcValue');
                 array_push($cspvalues, $framesrc);
             }
-            
+
             // font-src host-expr
             if($this->getConf('fontsrcValue')) {
                 $fontsrc = 'font-src ' . $this->getConf('fontsrcValue');
                 array_push($cspvalues, $fontsrc);
             }
-            
+
             // xhr-src host-expr
             if($this->getConf('xhrsrcValue')) {
                 $xhrsrc = 'xhr-src ' . $this->getConf('xhrsrcValue');
@@ -102,7 +102,6 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
             if($this->getConf('frameancestorsValue')) {
                 $frameancestors = 'frame-ancestors ' . $this->getConf('frameancestorsValue');
                 array_push($cspvalues, $frameancestors);
-                
             }
 
             // style-src host-expr
@@ -110,7 +109,7 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
                 $stylesrc = 'style-src ' . $this->getConf('stylesrcValue');
                 array_push($cspvalues, $stylesrc);
             }
-            
+
             // report-uri uri
             if($this->getConf('reporturiValue')) {
                 $reportui = 'report-uri ' . $this->getConf('reporturiValue');
@@ -125,13 +124,13 @@ class action_plugin_cspheader extends DokuWiki_Action_Plugin {
 
             // concat each array element seperated by a semicolon and a space
             $xcspheader .= implode('; ', $cspvalues); 
-	    $cspheader .= implode('; ', $cspvalues);
-            
+            $cspheader .= implode('; ', $cspvalues);
+
             if($conf["allowdebug"]) msg("CSPheader plugin (DEBUG): ". $cspheader);
-            
+
             // add the CSP header to the existing headers
             array_push($event->data, $cspheader);
-	    array_push($event->data, $xcspheader);
+            array_push($event->data, $xcspheader);
         }
     }
 }
