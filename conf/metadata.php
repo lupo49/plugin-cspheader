@@ -6,18 +6,28 @@
  * @author    Matthias Schulte <post@lupo49.de>
  */
 
-$meta['enableHeader']        = array('onoff');
-$meta['allowValue']          = array('string');
-$meta['optionsInline']       = array('onoff');
-$meta['optionsEval']         = array('onoff');
-$meta['imgsrcValue']         = array('string');
-$meta['mediasrcValue']       = array('string');
-$meta['scriptsrcValue']      = array('string');
-$meta['objectsrcValue']      = array('string');
-$meta['framesrcValue']       = array('string');
-$meta['fontsrcValue']        = array('string');
-$meta['xhrsrcValue']         = array('string');
-$meta['frameancestorsValue'] = array('string');
-$meta['stylesrcValue']       = array('string');
-$meta['reporturiValue']      = array('string');
-$meta['policyuriValue']      = array('string');
+$meta['defaultsrcValue'] = array('');
+$meta['childsrcValue'] = array('');
+$meta['scriptsrcValue'] = array('');
+$meta['scriptsrcattrValue'] = array('');
+$meta['scriptsrcelemValue'] = array('');
+$meta['stylesrcValue'] = array('');
+$meta['stylesrcattrValue'] = array('');
+$meta['stylesrcelemValue'] = array('');
+$meta['objectsrcValue'] = array('');
+$meta['imgsrcValue'] = array('');
+$meta['connectsrcValue'] = array('');
+$meta['fontsrcValue'] = array('');
+$meta['workersrcValue'] = array('');
+$meta['mediasrcValue'] = array('');
+$meta['manifestsrcValue'] = array('');
+$meta['prefetchsrcValue'] = array('');
+$meta['framesrcValue'] = array('');
+$meta['frameancestorsValue'] = array('');
+$meta['baseuriValue'] = array('');
+$meta['formactionValue'] = array('');
+$meta['navigatetoValue'] = array('');
+$meta['trustedtypesValue'] = array('');
+$meta['plugintypesValue'] = array('');
+$meta['sandboxValue'] = array('');
+$meta['reporturiValue'] = array('');
