@@ -5,19 +5,29 @@
  *
  * @author     Matthias Schulte <post@lupo49.de>
  */
- 
-$lang['enableHeader']        = 'Enables/Disables the CSP-Header';
-$lang['allowValue']          = 'Set value for the "allow"-directive';
-$lang['optionsInline']       = 'Enable/Disable the "options inline-script" directive';
-$lang['optionsEval']         = 'Enable/Disable the "options eval-script" directive';
-$lang['imgsrcValue']         = 'Set value for the "img-src"-directive';
-$lang['mediasrcValue']       = 'Set value for the "media-src"-directive';
-$lang['scriptsrcValue']      = 'Set value for the "script-src"-directive';
-$lang['objectsrcValue']      = 'Set value for the "object-src"-directive';
-$lang['framesrcValue']       = 'Set value for the "framesrc-src"-directive';
-$lang['fontsrcValue']        = 'Set value for the "font-src"-directive';
-$lang['xhrsrcValue']         = 'Set value for the "xhr-src"-directive';
-$lang['frameancestorsValue'] = 'Set value for the "frame-ancestors"-directive';
-$lang['stylesrcValue']       = 'Set value for the "style-src"-directive';
-$lang['reporturiValue']      = 'Set value for the "report-uri"-directive (URL/Port must be equal to the CSP-Host)';
-$lang['policyuriValue']      = 'Set value for the "policy-uri"-directive (conflicts with the other directives, see documentation)';
+
+$lang['baseuriValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri">base-uri</a> directive.';
+$lang['childsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/child-src">child-src</a> directive.';
+$lang['connectsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src">connect-src</a> directive.';
+$lang['defaultsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src">default-src</a> directive.';
+$lang['fontsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src">font-src</a> directive.';
+$lang['formactionValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/form-action">form-action</a> directive.';
+$lang['frameancestorsValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors">frame-ancestors</a> directive.';
+$lang['framesrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src">frame-src</a> directive.';
+$lang['imgsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/">img-src</a> directive.';
+$lang['manifestsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/manifest-src">manifest-src</a> directive.';
+$lang['mediasrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/media-src">media-src</a> directive.';
+$lang['navigatetoValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/navigate-to">navigate-to</a> directive.';
+$lang['objectsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/object-src">object-src</a> directive.';
+$lang['plugintypesValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/plugin-types">plugin-types</a> directive.';
+$lang['prefetchsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/prefetch-src">prefetch-src</a> directive.';
+$lang['reporturiValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri">report-uri</a> directive.';
+$lang['sandboxValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox">sandbox</a> directive.';
+$lang['scriptsrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src">script-src</a> directive.';
+$lang['scriptsrcattrValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-attr">script-src-attr</a> directive.';
+$lang['scriptsrcelemValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem">script-src-elem</a> directive.';
+$lang['stylesrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/styles-src">styles-src</a> directive.';
+$lang['stylesrcattrValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/styles-src-attr">styles-src-attr</a> directive.';
+$lang['stylesrcelemValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/styles-src-elem">styles-src-attr</a> directive.';
+$lang['trustedtypesValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/trusted-types">trusted-types</a> directive.';
+$lang['workersrcValue'] = 'Set value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src">worker-src</a> directive.';
